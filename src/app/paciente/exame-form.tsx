@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { formatCPF, isValidCPF } from "@/lib/cpf";
-import SuccessCard from "./SuccessCard";
+import SuccessCard from "./success-card";
 
 type FormState = "idle" | "loading" | "success" | "error";
 type FieldErrors = { cpf?: string; protocol?: string };

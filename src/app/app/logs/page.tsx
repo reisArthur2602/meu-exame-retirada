@@ -1,5 +1,5 @@
-import AppHeader from "@/components/app/AppHeader";
-import LogsTable from "@/components/logs/LogsTable";
+import AppHeader from "@/components/app-header";
+import LogsTable from "./logs-table";
 
 export default function LogsRoute() {
   return (

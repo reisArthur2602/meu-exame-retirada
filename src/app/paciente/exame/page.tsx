@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getExameByCpfAndProtocolo } from "@/lib/exames";
-import ExameCard from "@/components/exame/ExameCard";
+import ExameCard from "./exame-card";
 
 interface PageProps {
   searchParams: Promise<{ cpf?: string; protocolo?: string }>;

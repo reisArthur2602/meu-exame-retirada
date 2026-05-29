@@ -1,6 +1,6 @@
 import { type Exame, formatDate } from "@/lib/exames";
 import { maskCPF } from "@/lib/cpf";
-import DownloadButton from "./DownloadButton";
+import DownloadButton from "./download-button";
 
 const STATUS_CONFIG = {
   disponivel: { label: "Disponível", className: "bg-green-100 text-green-700" },

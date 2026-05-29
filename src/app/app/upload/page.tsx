@@ -1,6 +1,6 @@
-import AppHeader from "@/components/app/AppHeader";
-import UploadForm from "@/components/upload/UploadForm";
-import ExamesTable from "@/components/upload/ExamesTable";
+import AppHeader from "@/components/app-header";
+import UploadForm from "./upload-form";
+import ExamesTable from "./exames-table";
 
 export default function UploadRoute() {
   return (

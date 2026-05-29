@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AvatarDropdown from "./AvatarDropdown";
+import AvatarDropdown from "./avatar-dropdown";
 
 type NavItem = "upload" | "usuarios" | "central" | "logs";
 

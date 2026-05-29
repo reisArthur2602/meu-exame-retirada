@@ -11,7 +11,7 @@ import {
   getInitials,
   getAvatarColor,
 } from "@/lib/usuarios";
-import UsuarioModal, { type UsuarioFormData } from "./UsuarioModal";
+import UsuarioModal, { type UsuarioFormData } from "./usuario-modal";
 
 const PER_PAGE = 6;
 

@@ -1,5 +1,5 @@
-import AppHeader from "@/components/app/AppHeader";
-import BuscaExames from "@/components/central/BuscaExames";
+import AppHeader from "@/components/app-header";
+import BuscaExames from "./busca-exames";
 
 export default function CentralRoute() {
   return (

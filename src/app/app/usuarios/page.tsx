@@ -1,5 +1,5 @@
-import AppHeader from "@/components/app/AppHeader";
-import UsuariosTable from "@/components/usuarios/UsuariosTable";
+import AppHeader from "@/components/app-header";
+import UsuariosTable from "./usuarios-table";
 
 export default function UsuariosRoute() {
   return (
