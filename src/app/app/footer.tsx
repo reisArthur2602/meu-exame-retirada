@@ -13,7 +13,7 @@ export default function Footer() {
               <span className="font-bold text-white">MeuExame</span>
             </a>
             <p className="text-sm leading-relaxed">
-              Plataforma digital para retirada de exames laboratoriais e de imagem com segurança e praticidade.
+              Retire e compartilhe exames laboratoriais e de imagem só com CPF e protocolo. Sem cadastro, sem app — direto no navegador.
             </p>
             <div className="flex gap-3 mt-4">
               {["instagram", "twitter", "linkedin"].map((social) => (
@@ -40,18 +40,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Plataforma</h4>
+            <h4 className="text-sm font-semibold text-white mb-4">Para pacientes</h4>
             <ul className="space-y-2 text-sm">
-              {["Como funciona", "Funcionalidades", "Segurança", "Integrações", "API para laboratórios"].map((item) => (
+              {["Retirar exame", "Como funciona", "Compartilhar com médico", "Segurança", "FAQ"].map((item) => (
                 <li key={item}><a href="#" className="hover:text-white transition-colors">{item}</a></li>
               ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-white mb-4">Empresa</h4>
+            <h4 className="text-sm font-semibold text-white mb-4">Para clínicas</h4>
             <ul className="space-y-2 text-sm">
-              {["Sobre nós", "Blog", "Carreiras", "Imprensa", "Parceiros"].map((item) => (
+              {["Painel da clínica", "Enviar laudos", "Gerar protocolos", "Aviso por WhatsApp", "Integrações"].map((item) => (
                 <li key={item}><a href="#" className="hover:text-white transition-colors">{item}</a></li>
               ))}
             </ul>

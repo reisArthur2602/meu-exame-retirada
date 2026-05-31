@@ -1,5 +1,7 @@
 'use client';
 
+import { Download } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -28,34 +30,27 @@ export default function Navbar() {
                 </a>
 
                 <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-                    <a href="#como-funciona" className="hover:text-blue-600 transition-colors">
+                    <Link href="#como-funciona" className="hover:text-blue-600 transition-colors">
                         Como funciona
-                    </a>
-                    <a href="#funcionalidades" className="hover:text-blue-600 transition-colors">
+                    </Link>
+                    <Link href="#funcionalidades" className="hover:text-blue-600 transition-colors">
                         Funcionalidades
-                    </a>
-                    <a href="#depoimentos" className="hover:text-blue-600 transition-colors">
+                    </Link>
+                    <Link href="#depoimentos" className="hover:text-blue-600 transition-colors">
                         Depoimentos
-                    </a>
-                    <a href="#faq" className="hover:text-blue-600 transition-colors">
+                    </Link>
+                    <Link href="#faq" className="hover:text-blue-600 transition-colors">
                         FAQ
-                    </a>
+                    </Link>
                 </nav>
 
-                <div className="hidden md:flex items-center gap-3">
-                    <a
-                        href="#"
-                        className="text-sm font-medium text-slate-700 hover:text-blue-600 transition-colors"
-                    >
-                        Entrar
-                    </a>
-                    <a
-                        href="#"
-                        className="text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors"
-                    >
-                        Criar conta grátis
-                    </a>
-                </div>
+                <Link
+                    href="#retirar"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200"
+                >
+                    <Download className="size-4" />
+                    Retirar exame
+                </Link>
 
                 <button
                     className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
@@ -125,14 +120,19 @@ export default function Navbar() {
                         FAQ
                     </a>
                     <hr className="border-slate-100" />
-                    <a href="#" className="text-sm font-medium text-slate-700">
-                        Entrar
+                    <a
+                        href="/app/login"
+                        className="text-sm font-medium text-slate-700"
+                        onClick={() => setOpen(false)}
+                    >
+                        Sou clínica
                     </a>
                     <a
-                        href="#"
+                        href="#retirar"
                         className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg text-center"
+                        onClick={() => setOpen(false)}
                     >
-                        Criar conta grátis
+                        Retirar exame
                     </a>
                 </div>
             )}

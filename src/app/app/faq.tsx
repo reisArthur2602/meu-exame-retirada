@@ -4,28 +4,32 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "O MeuExame é gratuito?",
-    answer: "Sim! A retirada e visualização de exames é completamente gratuita para pacientes. Oferecemos também planos premium com recursos avançados como histórico ilimitado, múltiplos perfis familiares e relatórios de saúde personalizados.",
+    question: "Preciso criar uma conta para retirar meu exame?",
+    answer: "Não. Você acessa seu exame apenas com CPF e o código de protocolo que a clínica envia. Sem cadastro, senha, e-mail de confirmação ou aplicativo.",
   },
   {
-    question: "Quais laboratórios estão integrados à plataforma?",
-    answer: "Temos mais de 500 laboratórios e clínicas parceiras em todo o Brasil, incluindo grandes redes como Fleury, DASA, Hermes Pardini, Sabin, entre outros. Se o seu laboratório não estiver listado, você pode solicitar a integração.",
+    question: "Onde encontro o código de protocolo?",
+    answer: "A clínica ou laboratório envia o protocolo no momento da coleta — geralmente por WhatsApp, e-mail ou impresso no comprovante. Se não recebeu, entre em contato direto com o local onde realizou o exame.",
   },
   {
-    question: "Meus dados estão seguros?",
-    answer: "Absolutamente. Utilizamos criptografia SSL de 256 bits, armazenamento em conformidade com a LGPD e nunca compartilhamos seus dados com terceiros sem seu consentimento explícito. Seus laudos pertencem exclusivamente a você.",
-  },
-  {
-    question: "Como faço para acessar exames de familiares?",
-    answer: "Você pode criar perfis vinculados para dependentes (filhos menores, idosos) dentro da sua conta. Cada perfil tem acesso isolado aos seus próprios exames, mantendo a privacidade de todos.",
-  },
-  {
-    question: "Por quanto tempo meus exames ficam armazenados?",
-    answer: "No plano gratuito, os últimos 12 meses de exames ficam disponíveis. No plano premium, o armazenamento é ilimitado — todos os seus laudos desde o cadastro ficam acessíveis para sempre.",
+    question: "Como faço para compartilhar o exame com meu médico?",
+    answer: "Após acessar seu exame, clique em \"Compartilhar\". Você recebe um link seguro que pode enviar por WhatsApp, e-mail ou qualquer canal. Você define por quanto tempo o link fica válido — depois disso ele expira automaticamente.",
   },
   {
     question: "O laudo baixado tem validade legal?",
-    answer: "Sim. Todos os laudos baixados pela plataforma possuem assinatura digital ICP-Brasil e QR code de autenticação, tendo a mesma validade legal do documento físico original.",
+    answer: "Sim. Todos os laudos contêm assinatura digital ICP-Brasil e QR code de autenticidade, com a mesma validade legal do documento físico — aceito por médicos, planos de saúde e perícias.",
+  },
+  {
+    question: "Meus dados de saúde estão seguros?",
+    answer: "Usamos criptografia SSL de 256 bits ponta a ponta, armazenamento em conformidade com a LGPD e auditoria completa de acessos. Apenas quem tem o CPF e o protocolo consegue ver o exame.",
+  },
+  {
+    question: "E se eu perder o protocolo?",
+    answer: "Sem o protocolo, por segurança, só a clínica que realizou o exame pode reenviá-lo. Basta entrar em contato com o local — eles têm o registro completo da sua coleta.",
+  },
+  {
+    question: "Sou clínica ou laboratório — como passo a usar o sistema?",
+    answer: "Cadastre sua clínica em \"Sou clínica\" no topo da página. Você ganha acesso ao painel para enviar laudos, gerar protocolos e acompanhar entregas. Nenhuma instalação — funciona 100% no navegador.",
   },
 ];
 
@@ -33,7 +37,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-slate-200 rounded-xl overflow-hidden">
+    <div className="border border-slate-200 rounded-xl overflow-hidden bg-white">
       <button
         className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left hover:bg-slate-50 transition-colors"
         onClick={() => setOpen(!open)}
@@ -66,7 +70,7 @@ export default function FAQ() {
         <div className="text-center mb-14">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-widest">FAQ</span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">
-            Dúvidas frequentes
+            Perguntas frequentes
           </h2>
           <p className="mt-4 text-lg text-slate-500">
             Não encontrou o que procura?{" "}

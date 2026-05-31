@@ -6,7 +6,7 @@ const testimonials = [
     avatar: "AC",
     color: "bg-blue-500",
     stars: 5,
-    text: "Finalmente não preciso mais ir até o laboratório buscar resultado. Recebi a notificação no celular e em segundos já tinha meu exame em mãos. Incrível!",
+    text: "Recebi o protocolo por WhatsApp, digitei o CPF e em segundos baixei o laudo. Não precisei criar conta nem instalar nada. Que alívio!",
   },
   {
     name: "Dr. Ricardo Mendes",
@@ -15,7 +15,7 @@ const testimonials = [
     avatar: "RM",
     color: "bg-emerald-500",
     stars: 5,
-    text: "Meus pacientes chegam à consulta com os laudos organizados. O link seguro que eles compartilham comigo facilita demais o atendimento. Recomendo a todos.",
+    text: "Meus pacientes chegam à consulta com o laudo no celular através do link compartilhado. Acelerou meu atendimento e eliminou o papel.",
   },
   {
     name: "Carlos Eduardo Lima",
@@ -24,16 +24,16 @@ const testimonials = [
     avatar: "CL",
     color: "bg-violet-500",
     stars: 5,
-    text: "Tenho histórico de diabetes e preciso acompanhar exames mensais. O MeuExame me ajuda a manter tudo organizado e a mostrar a evolução pro médico. Essencial!",
+    text: "Minha mãe tem 72 anos e conseguiu retirar o exame sozinha pelo celular. CPF, protocolo e pronto — sem senha pra esquecer.",
   },
   {
-    name: "Fernanda Rocha",
-    role: "Enfermeira",
+    name: "Clínica Vida Plena",
+    role: "Clínica parceira",
     city: "Curitiba, PR",
-    avatar: "FR",
+    avatar: "VP",
     color: "bg-rose-500",
     stars: 5,
-    text: "Uso o MeuExame pessoalmente e indico para todos os meus pacientes. A plataforma é intuitiva, segura e resolve um problema real que todo mundo tem.",
+    text: "Cortamos pela metade as ligações pedindo resultado. Subimos o PDF, mandamos o protocolo no WhatsApp e o paciente se vira sozinho.",
   },
   {
     name: "João Paulo Souza",
@@ -42,7 +42,7 @@ const testimonials = [
     avatar: "JS",
     color: "bg-amber-500",
     stars: 5,
-    text: "Morava longe do laboratório e era um sufoco buscar resultados. Agora recebo notificação e baixo na hora. Economizo tempo e gasolina. Muito obrigado!",
+    text: "Mandei o link direto pro meu cardiologista pelo WhatsApp. Ele abriu na hora, sem precisar baixar nada. Resolvi a teleconsulta em 5 minutos.",
   },
   {
     name: "Dra. Patrícia Alves",
@@ -51,7 +51,7 @@ const testimonials = [
     avatar: "PA",
     color: "bg-cyan-500",
     stars: 5,
-    text: "A praticidade do compartilhamento seguro transformou minha rotina clínica. Consigo consultar laudos de imagem em alta qualidade direto no computador.",
+    text: "O QR code de autenticidade me dá segurança de que o laudo é real, sem precisar ligar pra clínica. Recomendo a todos os meus pacientes.",
   },
 ];
 
@@ -74,10 +74,10 @@ export default function Testimonials() {
         <div className="text-center mb-14">
           <span className="text-sm font-semibold text-blue-600 uppercase tracking-widest">Depoimentos</span>
           <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900">
-            Quem usa, aprova
+            Quem usa, recomenda
           </h2>
           <p className="mt-4 text-lg text-slate-500 max-w-xl mx-auto">
-            Mais de 120 mil pacientes e profissionais de saúde confiam no MeuExame.
+            Pacientes, médicos e clínicas que trocaram a fila pelo link.
           </p>
         </div>
 
