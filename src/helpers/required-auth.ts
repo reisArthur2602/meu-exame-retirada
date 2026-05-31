@@ -1,9 +1,10 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { cache } from 'react';
 import { getSession } from './get-session';
 
-export async function requiredAuth() {
+export const requiredAuth = cache(async () => {
     const session = await getSession();
-    if (!session) redirect('/app/login');
-}
+    if (!session) redirect('/login');
+});

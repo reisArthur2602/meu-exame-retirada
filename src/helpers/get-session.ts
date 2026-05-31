@@ -29,13 +29,12 @@ export const getSession = cache(async () => {
         if (!userId) return null;
 
         const user = await prisma.user.findUnique({
-            where: {
-                id: userId,
-            },
+            where: { id: userId, status: 'ativo' },
             select: {
                 id: true,
                 email: true,
                 nome: true,
+                role: true,
             },
         });
 

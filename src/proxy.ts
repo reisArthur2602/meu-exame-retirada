@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 const COOKIE_NAME = 'meu_exame_session';
-const LOGIN_PATH = '/app/login';
+const LOGIN_PATH = '/login';
 
 export async function proxy(request: NextRequest) {
     const token = request.cookies.get(COOKIE_NAME)?.value;
@@ -28,5 +28,5 @@ function redirectToLogin(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/app/painel/:path*'],
+    matcher: ['/envio', '/equipe'],
 };

@@ -1,9 +1,7 @@
 'use client';
 
 import {
-    cloneElement,
     createContext,
-    isValidElement,
     useContext,
     useEffect,
     useId,
@@ -64,7 +62,9 @@ function DialogContent({ children, className = '', ...props }: DialogContentProp
     return (
         <div
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-            onClick={(e) => { if (e.target === e.currentTarget) onOpenChange(false); }}
+            onClick={(e) => {
+                if (e.target === e.currentTarget) onOpenChange(false);
+            }}
         >
             <div
                 role="dialog"
@@ -95,7 +95,13 @@ function DialogHeader({ children, className = '', ...props }: HTMLAttributes<HTM
                 className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg hover:bg-slate-100 shrink-0"
                 aria-label="Fechar"
             >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                >
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -108,11 +114,7 @@ function DialogHeader({ children, className = '', ...props }: HTMLAttributes<HTM
 function DialogTitle({ children, className = '', ...props }: HTMLAttributes<HTMLHeadingElement>) {
     const { titleId } = useDialogContext();
     return (
-        <h2
-            id={titleId}
-            className={`text-base font-bold text-slate-900 ${className}`}
-            {...props}
-        >
+        <h2 id={titleId} className={`text-base font-bold text-slate-900 ${className}`} {...props}>
             {children}
         </h2>
     );
@@ -140,36 +142,20 @@ function DialogFooter({ children, className = '', ...props }: HTMLAttributes<HTM
 
 // ─── DialogClose ──────────────────────────────────────────────────────────────
 
-interface DialogCloseProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    asChild?: boolean;
-}
-
-function DialogClose({ children, asChild, onClick, ...props }: DialogCloseProps) {
+function DialogClose({ children, onClick, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
     const { onOpenChange } = useDialogContext();
-
-    function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-        onOpenChange(false);
-        onClick?.(e);
-    }
-
-    if (asChild && isValidElement(children)) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return cloneElement(children as React.ReactElement<any>, { onClick: handleClick });
-    }
-
     return (
-        <button type="button" onClick={handleClick} {...props}>
+        <button
+            type="button"
+            onClick={(e) => {
+                onOpenChange(false);
+                onClick?.(e);
+            }}
+            {...props}
+        >
             {children}
         </button>
     );
 }
 
-export {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-    DialogBody,
-    DialogFooter,
-    DialogClose,
-};
+export { Dialog, DialogBody, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle };
