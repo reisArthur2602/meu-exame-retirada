@@ -1,4 +1,5 @@
-import { ArrowLeft, ChevronRight, FileText, ShieldCheck, TriangleAlert } from 'lucide-react';
+import Logo from '@/components/logo';
+import { ArrowLeft, ChevronRight, TriangleAlert } from 'lucide-react';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getExame } from './actions/get-exame';
@@ -17,20 +18,18 @@ export default async function ExameRoute({ searchParams }: PageProps) {
     const firstName = exame?.nome.trim().split(' ')[0];
 
     return (
-        <div className="flex-1 bg-slate-100 flex flex-col">
-            <header className="bg-white/80 backdrop-blur-sm border-b border-slate-100 sticky top-0 z-10">
+        <div className="flex-1 flex flex-col">
+            {/* Ambient background */}
+            <div className="fixed inset-0 bg-linear-to-b from-slate-50 to-white -z-10 pointer-events-none" />
+            <div className="fixed -top-32 -left-32 size-150 rounded-full bg-blue-100/40 blur-3xl -z-10 pointer-events-none" />
+            <div className="fixed top-1/2 -right-32 size-125 rounded-full bg-indigo-100/30 blur-3xl -z-10 pointer-events-none" />
+
+            <header className="sticky top-0 z-50 backdrop-blur-xl ">
                 <div className="max-w-3xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-                    <Link href="/" className="flex items-center gap-2.5 shrink-0">
-                        <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center shadow-sm shadow-blue-300">
-                            <FileText className="size-4 text-white" />
-                        </div>
-                        <span className="font-bold text-lg text-slate-900 tracking-tight">
-                            MeuExame
-                        </span>
-                    </Link>
+                    <Logo href="/" />
 
                     <Link
-                        href="/app"
+                        href="/"
                         className="text-sm font-medium text-slate-500 hover:text-blue-600 transition-colors flex items-center gap-1.5 group"
                     >
                         <ArrowLeft className="size-4 group-hover:-translate-x-0.5 transition-transform" />
@@ -70,8 +69,6 @@ export default async function ExameRoute({ searchParams }: PageProps) {
                     )}
                 </div>
             </main>
-
-            
         </div>
     );
 }
