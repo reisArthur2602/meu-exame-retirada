@@ -136,7 +136,7 @@ export default function ExamesTable({ data, meta }: ExamesTableProps) {
     // ─── Render ──────────────────────────────────────────────────────────────
 
     return (
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
             {/* Header */}
             <div className="px-6 py-4 border-b border-slate-100 flex sm:items-center gap-3 justify-between">
                 <h2 className="text-base font-bold text-slate-900 shrink-0">Exames enviados</h2>

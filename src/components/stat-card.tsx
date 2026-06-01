@@ -17,7 +17,7 @@ const COLOR_MAP: Record<StatCardColor, string> = {
 
 export default function StatCard({ label, value, icon, color = "slate" }: StatCardProps) {
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-4 flex items-center gap-3">
+    <div className="bg-white rounded-2xl   p-4 flex items-center gap-3">
       <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${COLOR_MAP[color]}`}>
         {icon}
       </div>

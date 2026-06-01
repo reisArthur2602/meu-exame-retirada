@@ -199,7 +199,7 @@ export default function UsuariosTable({ data, meta }: UsuariosTableProps) {
                 />
             </div>
 
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-2xl border border-slate-50  overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center gap-3">
                     <h2 className="text-base font-bold text-slate-900 shrink-0">
                         Usuários do sistema

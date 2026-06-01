@@ -173,25 +173,8 @@ export default function UploadForm() {
     const isPending = mutation.isPending;
 
     return (
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-            <h2 className="text-base font-bold text-slate-900 mb-5 flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-blue-100 flex items-center justify-center">
-                    <svg
-                        className="w-4 h-4 text-blue-600"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={1.5}
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
-                        />
-                    </svg>
-                </div>
-                Novo envio de exame
-            </h2>
+        <div className="">
+            
 
             <Form {...form}>
                 <form

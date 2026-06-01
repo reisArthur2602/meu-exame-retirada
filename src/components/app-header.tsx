@@ -22,7 +22,7 @@ export default async function AppHeader({ active = 'envio' }: AppHeaderProps) {
     const visibleItems = NAV_ITEMS.filter((item) => !item.adminOnly || isAdmin);
 
     return (
-        <header className="bg-white border-b border-slate-100 shadow-sm">
+        <header className="sticky top-0 z-50 bg-transparent backdrop-blur-xl ">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
                     <Logo href="/" />
