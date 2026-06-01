@@ -1,7 +1,7 @@
 import { getSession } from '@/helpers/get-session';
-import { FileText } from 'lucide-react';
 import Link from 'next/link';
 import AvatarDropdown from './avatar-dropdown';
+import Logo from './logo';
 
 type NavItem = 'envio' | 'equipe';
 
@@ -25,12 +25,7 @@ export default async function AppHeader({ active = 'envio' }: AppHeaderProps) {
         <header className="bg-white border-b border-slate-100 shadow-sm">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                    <Link href="/" className="flex items-center gap-2">
-                        <div className="size-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                            <FileText className="size-4 text-white" />
-                        </div>
-                        <span className="font-bold text-base text-slate-900">MeuExame</span>
-                    </Link>
+                    <Logo href="/" />
                     <span className="hidden sm:block text-slate-300">·</span>
                     <span className="hidden sm:block text-sm font-semibold text-slate-500">
                         Painel da Clínica

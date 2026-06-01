@@ -1,139 +1,77 @@
 'use client';
 
-import { Download } from 'lucide-react';
+import Logo from '@/components/logo';
+import { Download, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+
+const NAV_LINKS = [
+    { label: 'Como funciona', href: '#como-funciona' },
+    { label: 'Dúvidas', href: '#faq' },
+    { label: 'Área da clínica', href: '/login' },
+];
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-sm">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-xl ">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-                <a href="#" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                        <svg
-                            className="w-4 h-4 text-white"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2.5}
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"
-                            />
-                        </svg>
-                    </div>
-                    <span className="font-bold text-lg text-slate-900">MeuExame</span>
-                </a>
+                <Logo href="/" />
 
-                <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
-                    <Link href="#como-funciona" className="hover:text-blue-600 transition-colors">
-                        Como funciona
-                    </Link>
-                    <Link href="#funcionalidades" className="hover:text-blue-600 transition-colors">
-                        Funcionalidades
-                    </Link>
-                    <Link href="#depoimentos" className="hover:text-blue-600 transition-colors">
-                        Depoimentos
-                    </Link>
-                    <Link href="#faq" className="hover:text-blue-600 transition-colors">
-                        FAQ
-                    </Link>
+                <nav className="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+                    {NAV_LINKS.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="relative px-3 py-1.5 rounded-lg hover:text-blue-600 hover:bg-blue-50/60 transition-all duration-200"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
                 </nav>
 
-                <Link
-                    href="#retirar"
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm shadow-blue-200"
-                >
-                    <Download className="size-4" />
-                    Retirar exame
-                </Link>
+                <div className="flex items-center gap-2">
+                    <Link
+                        href="#retirar"
+                        className="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold bg-linear-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-4 py-2 rounded-lg transition-all duration-200 shadow-md shadow-blue-300/40 hover:shadow-lg hover:shadow-blue-300/50 hover:-translate-y-px"
+                    >
+                        <Download className="size-3.5" />
+                        Retirar exame
+                    </Link>
 
-                <button
-                    className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
-                    onClick={() => setOpen(!open)}
-                    aria-label="Menu"
-                >
-                    {open ? (
-                        <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    ) : (
-                        <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M4 6h16M4 12h16M4 18h16"
-                            />
-                        </svg>
-                    )}
-                </button>
+                    <button
+                        className="md:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100/80 transition-colors"
+                        onClick={() => setOpen(!open)}
+                        aria-label="Menu"
+                    >
+                        {open ? <X className="size-5" /> : <Menu className="size-5" />}
+                    </button>
+                </div>
             </div>
 
             {open && (
-                <div className="md:hidden border-t border-slate-100 bg-white px-4 py-4 flex flex-col gap-4">
-                    <a
-                        href="#como-funciona"
-                        className="text-sm font-medium text-slate-700"
-                        onClick={() => setOpen(false)}
-                    >
-                        Como funciona
-                    </a>
-                    <a
-                        href="#funcionalidades"
-                        className="text-sm font-medium text-slate-700"
-                        onClick={() => setOpen(false)}
-                    >
-                        Funcionalidades
-                    </a>
-                    <a
-                        href="#depoimentos"
-                        className="text-sm font-medium text-slate-700"
-                        onClick={() => setOpen(false)}
-                    >
-                        Depoimentos
-                    </a>
-                    <a
-                        href="#faq"
-                        className="text-sm font-medium text-slate-700"
-                        onClick={() => setOpen(false)}
-                    >
-                        FAQ
-                    </a>
-                    <hr className="border-slate-100" />
-                    <a
-                        href="/app/login"
-                        className="text-sm font-medium text-slate-700"
-                        onClick={() => setOpen(false)}
-                    >
-                        Sou clínica
-                    </a>
-                    <a
-                        href="#retirar"
-                        className="text-sm font-semibold bg-blue-600 text-white px-4 py-2 rounded-lg text-center"
-                        onClick={() => setOpen(false)}
-                    >
-                        Retirar exame
-                    </a>
+                <div className="md:hidden border-t border-white/50 bg-white/80 backdrop-blur-xl px-4 py-4 flex flex-col gap-1">
+                    {NAV_LINKS.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="text-sm font-medium text-slate-700 px-3 py-2 rounded-lg hover:bg-blue-50/60 hover:text-blue-600 transition-colors"
+                            onClick={() => setOpen(false)}
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
+                    <div className="pt-2 mt-1 border-t border-slate-100/80">
+                        <Link
+                            href="#retirar"
+                            className="flex items-center justify-center gap-1.5 text-sm font-semibold bg-linear-to-br from-blue-500 to-blue-600 text-white px-4 py-2.5 rounded-lg shadow-md shadow-blue-200/60"
+                            onClick={() => setOpen(false)}
+                        >
+                            <Download className="size-3.5" />
+                            Retirar exame
+                        </Link>
+                    </div>
                 </div>
             )}
         </header>

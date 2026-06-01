@@ -1,7 +1,7 @@
 import { siteUrl } from '@/constants';
 import { ReactQuery } from '@/integrations/react-query';
 import type { Metadata } from 'next';
-import { Geist_Mono, Manrope } from 'next/font/google';
+import { Geist_Mono, Inter, Manrope } from 'next/font/google';
 import { Toaster } from 'sonner';
 import './globals.css';
 

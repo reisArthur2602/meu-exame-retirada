@@ -16,12 +16,12 @@ const faqs = [
     answer: "Após acessar seu exame, clique em \"Compartilhar\". Você recebe um link seguro que pode enviar por WhatsApp, e-mail ou qualquer canal. Você define por quanto tempo o link fica válido — depois disso ele expira automaticamente.",
   },
   {
-    question: "O laudo baixado tem validade legal?",
-    answer: "Sim. Todos os laudos contêm assinatura digital ICP-Brasil e QR code de autenticidade, com a mesma validade legal do documento físico — aceito por médicos, planos de saúde e perícias.",
+    question: "O laudo baixado tem validade?",
+    answer: "O arquivo gerado é o mesmo enviado pela clínica. Consulte o local onde realizou o exame caso precise de informações sobre validade ou reconhecimento do documento.",
   },
   {
-    question: "Meus dados de saúde estão seguros?",
-    answer: "Usamos criptografia SSL de 256 bits ponta a ponta, armazenamento em conformidade com a LGPD e auditoria completa de acessos. Apenas quem tem o CPF e o protocolo consegue ver o exame.",
+    question: "Meus dados estão seguros?",
+    answer: "Nenhuma outra pessoa consegue acessar seu exame sem o CPF e o protocolo corretos. O acesso é restrito e nenhuma informação é compartilhada com terceiros.",
   },
   {
     question: "E se eu perder o protocolo?",

@@ -3,7 +3,7 @@ import LoginForm from './login-form';
 
 export default function LoginRoute() {
     return (
-        <div className="min-h-screen flex">
+        <div className="flex-1 flex">
             {/* Left — form */}
             <div className="flex-1 flex flex-col bg-white">
                 <div className="px-8 py-6 lg:px-12">
@@ -46,7 +46,6 @@ export default function LoginRoute() {
                 </div>
             </div>
 
-            {/* Right — showcase */}
             <div className="hidden lg:flex lg:w-[52%] bg-linear-to-br from-blue-600 to-blue-800 relative overflow-hidden">
                 <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-blue-500/25" />
                 <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-blue-900/40" />
