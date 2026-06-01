@@ -1,7 +1,7 @@
 'use server';
 
 import { Role } from '@/generated/prisma/enums';
-
+import { getSession } from '@/helpers/get-session';
 import prisma from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 
@@ -45,6 +45,11 @@ export async function updateUsuario(input: UpdateUsuarioInput): Promise<void> {
 }
 
 export async function toggleUsuarioStatus(id: string): Promise<void> {
+    const session = await getSession();
+    if (session?.user.id === id) {
+        throw new Error('Você não pode inativar sua própria conta.');
+    }
+
     const user = await prisma.user.findUniqueOrThrow({ where: { id }, select: { status: true } });
 
     await prisma.user.update({

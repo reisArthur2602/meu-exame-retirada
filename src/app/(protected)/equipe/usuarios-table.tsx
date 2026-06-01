@@ -502,6 +502,7 @@ export default function UsuariosTable({ data, meta }: UsuariosTableProps) {
             </div>
 
             <UsuarioModal
+                key={editingUser ? `edit-${editingUser.id}` : 'create'}
                 open={modalOpen}
                 onOpenChange={(open) => {
                     if (!open) closeModal();

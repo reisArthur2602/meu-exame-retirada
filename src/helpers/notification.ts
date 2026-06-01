@@ -1,39 +1,38 @@
-export function buildMensagemAtendimento(firstName: string, protocol: string): string {
-  return (
-    `Olá, ${firstName}. Seu exame está disponível para retirada online. ` +
-    `Acesse: https://meuexame.com.br/paciente. ` +
-    `Use seu CPF e o protocolo: ${protocol}. ` +
-    `Por segurança, não compartilhe essas informações.`
-  );
-}
+import { siteUrl } from '@/constants';
 
 export function buildWhatsAppMessage(firstName: string, protocol: string): string {
-  return (
-    `Olá, ${firstName}.\n\n` +
-    `Seu exame já está disponível para retirada online.\n\n` +
-    `Acesse:\nhttps://meuexame.com.br/paciente\n\n` +
-    `CPF: use o CPF informado no atendimento\n` +
-    `Protocolo: ${protocol}\n\n` +
-    `Por segurança, não compartilhe esses dados.`
-  );
+    return [
+        `Olá, ${firstName}!`,
+        ``,
+        `Seu exame já está disponível para retirada online.`,
+        ``,
+        `Acesse: ${siteUrl}`,
+        `Protocolo: ${protocol}`,
+        ``,
+        `Informe seu CPF e o protocolo acima para acessar o laudo.`,
+        ``,
+        `Por segurança, não compartilhe essas informações.`,
+    ].join('\n');
 }
 
 export function openWhatsApp(phone: string, message: string): void {
-  const number = "55" + phone.replace(/\D/g, "");
-  window.open(
-    `https://wa.me/${number}?text=${encodeURIComponent(message)}`,
-    "_blank",
-    "noopener,noreferrer",
-  );
+    const digits = phone.replace(/\D/g, '');
+    // Evita duplicar o DDI: 12 dígitos = DDI+DDD+fixo, 13 = DDI+DDD+celular
+    const number = digits.length === 12 || digits.length === 13 ? digits : '55' + digits;
+    window.open(
+        `https://wa.me/${number}?text=${encodeURIComponent(message)}`,
+        '_blank',
+        'noopener,noreferrer'
+    );
 }
 
 export function maskCPFForPrint(cpf: string): string {
-  return cpf.replace(/^(\d{3})(\.[\d.]+-)(  \d{2})$/, "***$2**");
+    return cpf.replace(/^(\d{3})(\.[\d.]+-)(  \d{2})$/, '***$2**');
 }
 
 export function printReceipt(name: string, cpf: string, protocol: string): void {
-  const masked = cpf.replace(/^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$/, "***.$2.$3-**");
-  const html = `<!DOCTYPE html>
+    const masked = cpf.replace(/^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$/, '***.$2.$3-**');
+    const html = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8"/>
@@ -60,12 +59,12 @@ export function printReceipt(name: string, cpf: string, protocol: string): void 
   <div class="field"><div class="label">CPF</div><div class="value mono">${masked}</div></div>
   <div class="field"><div class="label">Protocolo</div><div class="value mono">${protocol}</div></div>
   <hr class="divider"/>
-  <div class="field"><div class="label">Acesse em</div><div class="url">https://meuexame.com.br/paciente</div></div>
+  <div class="field"><div class="label">Acesse em</div><div class="url">${siteUrl}/paciente</div></div>
   <p class="note">Use seu CPF e protocolo para retirar o exame.<br/>Por segurança, não compartilhe esses dados.</p>
   <script>window.onload = function(){ window.print(); window.onafterprint = function(){ window.close(); }; }</script>
 </body>
 </html>`;
-  const win = window.open("", "_blank", "width=520,height=560");
-  win?.document.write(html);
-  win?.document.close();
+    const win = window.open('', '_blank', 'width=520,height=560');
+    win?.document.write(html);
+    win?.document.close();
 }

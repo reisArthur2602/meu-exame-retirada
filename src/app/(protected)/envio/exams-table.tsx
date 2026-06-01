@@ -2,12 +2,14 @@
 
 import { PaginationButton } from '@/components/ui/pagination-button';
 import SearchInput from '@/components/ui/search-input';
-import { formatCPF } from '@/helpers/cpf';
+import { siteUrl } from '@/constants';
 import { formatPhone } from '@/helpers/format-phone';
-import { buildWhatsAppMessage, openWhatsApp, printReceipt } from '@/helpers/notification';
+import { buildWhatsAppMessage, openWhatsApp } from '@/helpers/notification';
 import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { toast } from 'sonner';
+import { deleteExame } from './actions/delete-exame';
 import type { ExameRow } from './actions/get-exams';
 import type { ExameMeta } from './exams-data';
 import { PER_PAGE } from './exams-data';
@@ -74,8 +76,10 @@ export default function ExamesTable({ data, meta }: ExamesTableProps) {
         );
     }
 
-    function handleDownload(row: ExameRow) {
-        if (row.arquivoUrl) window.open(row.arquivoUrl, '_blank', 'noopener');
+    function handleCopyLink(row: ExameRow) {
+        const url = `${siteUrl}/paciente?cpf=${encodeURIComponent(row.cpf)}&protocolo=${encodeURIComponent(row.protocolo)}`;
+        navigator.clipboard.writeText(url);
+        toast.success('Link copiado!');
     }
 
     function handleWhatsApp(row: ExameRow) {
@@ -98,8 +102,18 @@ export default function ExamesTable({ data, meta }: ExamesTableProps) {
         setPhoneInput('');
     }
 
-    function handlePrint(row: ExameRow) {
-        printReceipt(row.paciente, formatCPF(row.cpf), row.protocolo);
+    async function handleDelete(row: ExameRow) {
+        if (
+            !window.confirm(`Remover o exame de ${row.paciente}?\nEsta ação não pode ser desfeita.`)
+        )
+            return;
+        try {
+            await deleteExame(row.id);
+            toast.success('Exame removido.');
+            router.refresh();
+        } catch {
+            toast.error('Erro ao remover o exame. Tente novamente.');
+        }
     }
 
     // ─── Table ───────────────────────────────────────────────────────────────
@@ -108,11 +122,11 @@ export default function ExamesTable({ data, meta }: ExamesTableProps) {
         () =>
             getColumns({
                 onView: handleView,
-                onDownload: handleDownload,
+                onCopyLink: handleCopyLink,
                 onWhatsApp: handleWhatsApp,
-                onPrint: handlePrint,
+                onDelete: handleDelete,
             }),
-        []
+        [] // eslint-disable-line react-hooks/exhaustive-deps
     );
 
     const table = useReactTable({

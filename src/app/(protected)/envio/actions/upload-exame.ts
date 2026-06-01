@@ -1,5 +1,6 @@
 'use server';
 
+import { normalizePhone } from '@/helpers/format-phone';
 import { generateProtocolo } from '@/helpers/generate-protocolo';
 import { requiredAuth } from '@/helpers/required-auth';
 import { uploadToFtp } from '@/lib/ftp';
@@ -36,7 +37,7 @@ export async function uploadExame(input: UploadExameInput): Promise<void> {
             protocolo,
             nome: input.nome,
             cpf: input.cpf,
-            telefone: input.telefone ?? null,
+            telefone: input.telefone ? normalizePhone(input.telefone) : null,
             arquivoUrl,
         },
     });

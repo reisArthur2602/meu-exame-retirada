@@ -1,11 +1,14 @@
 'use client';
 
-import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 /* ── Context ─────────────────────────────────────── */
 interface DropdownCtx {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    triggerRef: React.RefObject<HTMLButtonElement | null>;
+    contentRef: React.RefObject<HTMLDivElement | null>;
 }
 
 const Ctx = createContext<DropdownCtx | null>(null);
@@ -19,11 +22,13 @@ function useDropdownCtx() {
 /* ── Root ────────────────────────────────────────── */
 export function Dropdown({ children }: { children: React.ReactNode }) {
     const [open, setOpen] = useState(false);
-    const ref = useRef<HTMLDivElement>(null);
+    const triggerRef = useRef<HTMLButtonElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         function onMouseDown(e: MouseEvent) {
-            if (ref.current && !ref.current.contains(e.target as Node)) {
+            const t = e.target as Node;
+            if (!triggerRef.current?.contains(t) && !contentRef.current?.contains(t)) {
                 setOpen(false);
             }
         }
@@ -39,8 +44,8 @@ export function Dropdown({ children }: { children: React.ReactNode }) {
     }, []);
 
     return (
-        <Ctx.Provider value={{ open, setOpen }}>
-            <div ref={ref} className="relative">
+        <Ctx.Provider value={{ open, setOpen, triggerRef, contentRef }}>
+            <div className="relative inline-block">
                 {children}
             </div>
         </Ctx.Provider>
@@ -55,9 +60,10 @@ export function DropdownTrigger({
     children: React.ReactNode;
     className?: string;
 }) {
-    const { open, setOpen } = useDropdownCtx();
+    const { open, setOpen, triggerRef } = useDropdownCtx();
     return (
         <button
+            ref={triggerRef}
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
@@ -80,17 +86,64 @@ export function DropdownContent({
     className?: string;
 }) {
     const { open } = useDropdownCtx();
-    if (!open) return null;
+    if (!open || typeof document === 'undefined') return null;
+    return <DropdownPanel align={align} className={className}>{children}</DropdownPanel>;
+}
 
-    return (
+function DropdownPanel({
+    children,
+    align,
+    className,
+}: {
+    children: React.ReactNode;
+    align: 'left' | 'right';
+    className: string;
+}) {
+    const { triggerRef, contentRef } = useDropdownCtx();
+    const [style, setStyle] = useState<React.CSSProperties>({
+        position: 'fixed',
+        visibility: 'hidden',
+        top: 0,
+        left: 0,
+        zIndex: 50,
+    });
+
+    useLayoutEffect(() => {
+        const trigger = triggerRef.current;
+        const content = contentRef.current;
+        if (!trigger || !content) return;
+
+        const tr = trigger.getBoundingClientRect();
+        const co = content.getBoundingClientRect();
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // Flip upward when not enough space below
+        const below = tr.bottom + 4;
+        const above = tr.top - co.height - 4;
+        const top = below + co.height > vh && above > 0 ? above : below;
+
+        const next: React.CSSProperties = { position: 'fixed', top, zIndex: 50, visibility: 'visible' };
+
+        if (align === 'right') {
+            next.right = Math.max(0, vw - tr.right);
+        } else {
+            next.left = Math.min(tr.left, vw - co.width);
+        }
+
+        setStyle(next);
+    }, [align, triggerRef, contentRef]);
+
+    return createPortal(
         <div
+            ref={contentRef}
+            style={style}
             role="menu"
-            className={`absolute top-full mt-2 z-50 min-w-56 bg-white border border-slate-100 rounded-2xl shadow-xl shadow-slate-200/60 overflow-hidden
-                ${align === 'right' ? 'right-0' : 'left-0'}
-                ${className}`}
+            className={`min-w-44 bg-white border border-slate-100 rounded-xl shadow-lg shadow-slate-200/60 py-1 overflow-hidden ${className}`}
         >
             {children}
-        </div>
+        </div>,
+        document.body
     );
 }
 
@@ -102,12 +155,12 @@ export function DropdownLabel({
     children: React.ReactNode;
     className?: string;
 }) {
-    return <div className={`px-4 py-3 ${className}`}>{children}</div>;
+    return <div className={`px-3.5 py-2.5 ${className}`}>{children}</div>;
 }
 
 /* ── Separator ───────────────────────────────────── */
 export function DropdownSeparator({ className = '' }: { className?: string }) {
-    return <div role="separator" className={`border-t border-slate-100 ${className}`} />;
+    return <div role="separator" className={`border-t border-slate-100 my-1 ${className}`} />;
 }
 
 /* ── Item (botão) ────────────────────────────────── */
@@ -136,18 +189,12 @@ export function DropdownItem({
             type="button"
             role="menuitem"
             onClick={handleClick}
-            className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors
-                ${
-                    danger
-                        ? 'text-red-600 hover:bg-red-50'
-                        : 'text-slate-700 hover:bg-slate-50'
-                }
+            className={`w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium transition-colors
+                ${danger ? 'text-red-600 hover:bg-red-50' : 'text-slate-700 hover:bg-slate-50'}
                 ${className}`}
         >
             {icon && (
-                <span
-                    className={`size-4 shrink-0 ${danger ? 'text-red-500' : 'text-slate-400'}`}
-                >
+                <span className={`size-3.5 shrink-0 ${danger ? 'text-red-500' : 'text-slate-400'}`}>
                     {icon}
                 </span>
             )}
@@ -175,18 +222,12 @@ export function DropdownItemForm({
             <button
                 type="submit"
                 role="menuitem"
-                className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors
-                    ${
-                        danger
-                            ? 'text-red-600 hover:bg-red-50'
-                            : 'text-slate-700 hover:bg-slate-50'
-                    }
+                className={`w-full flex items-center gap-2.5 px-3.5 py-2 text-xs font-medium transition-colors
+                    ${danger ? 'text-red-600 hover:bg-red-50' : 'text-slate-700 hover:bg-slate-50'}
                     ${className}`}
             >
                 {icon && (
-                    <span
-                        className={`size-4 shrink-0 ${danger ? 'text-red-500' : 'text-slate-400'}`}
-                    >
+                    <span className={`size-3.5 shrink-0 ${danger ? 'text-red-500' : 'text-slate-400'}`}>
                         {icon}
                     </span>
                 )}
