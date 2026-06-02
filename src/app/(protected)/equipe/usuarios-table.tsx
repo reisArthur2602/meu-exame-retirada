@@ -11,6 +11,7 @@ import { type UsuarioRow, type getTeamMeta } from './actions/get-usuarios';
 import { deleteUsuario, toggleUsuarioStatus } from './actions/save-usuario';
 import UsuarioModal from './usuario-modal';
 import { PER_PAGE } from './usuarios-data';
+import { Role } from '@/generated/prisma/enums';
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -96,7 +97,7 @@ export default function UsuariosTable({ data, meta }: UsuariosTableProps) {
 
     const page = meta.page;
     const search = searchParams.get('search') ?? '';
-    const roleFilter = (searchParams.get('role') ?? 'all') as 'all' | 'ADMIN' | 'MEMBER';
+    const roleFilter = (searchParams.get('role') ?? 'all') as 'all' | Role;
 
     // ─── Search debounce → URL ───────────────────────────────────────────────
 

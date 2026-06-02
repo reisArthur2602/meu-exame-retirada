@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 const COOKIE_NAME = 'meu_exame_session';
 const LOGIN_PATH = '/login';
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const token = request.cookies.get(COOKIE_NAME)?.value;
 
     if (!token) return redirectToLogin(request);
@@ -23,10 +23,9 @@ export async function proxy(request: NextRequest) {
 
 function redirectToLogin(request: NextRequest) {
     const loginUrl = new URL(LOGIN_PATH, request.url);
-
     return NextResponse.redirect(loginUrl);
 }
 
 export const config = {
-    matcher: ['/envio', '/equipe'],
+    matcher: ['/envio/:path*', '/equipe/:path*'],
 };

@@ -1,7 +1,7 @@
 import { getTeam, type RoleFilter } from './actions/get-usuarios';
 import UsuariosTable from './usuarios-table';
 
-export const PER_PAGE = 6;
+export const PER_PAGE = 5;
 
 interface UsuariosDataProps {
     page: number;

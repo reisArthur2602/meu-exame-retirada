@@ -1,5 +1,3 @@
-'use server';
-
 import prisma from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';

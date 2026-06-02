@@ -4,7 +4,6 @@ import Button from '@/components/ui/button';
 import {
     Dialog,
     DialogBody,
-    DialogClose,
     DialogContent,
     DialogFooter,
     DialogHeader,
@@ -172,8 +171,10 @@ export default function UsuarioModal({
                                     )}
                                 />
                             ) : (
-                                <FormItem>
-                                    <FormLabel>E-mail institucional</FormLabel>
+                                <div className="flex flex-col gap-1.5">
+                                    <label className="text-sm font-medium text-slate-700">
+                                        E-mail institucional
+                                    </label>
                                     <Input
                                         value={usuario?.email ?? ''}
                                         disabled
@@ -182,7 +183,7 @@ export default function UsuarioModal({
                                     <p className="text-xs text-slate-400">
                                         O e-mail não pode ser alterado após o cadastro.
                                     </p>
-                                </FormItem>
+                                </div>
                             )}
 
                             {/* Perfil */}
@@ -322,17 +323,6 @@ export default function UsuarioModal({
                             )}
 
                             <DialogFooter>
-                                <DialogClose>
-                                    <Button
-                                        type="button"
-                                        variant="secondary"
-                                        size="lg"
-                                        className="flex-1"
-                                        disabled={isPending}
-                                    >
-                                        Cancelar
-                                    </Button>
-                                </DialogClose>
                                 <Button
                                     type="submit"
                                     size="lg"
