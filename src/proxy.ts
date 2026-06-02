@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 const COOKIE_NAME = 'meu_exame_session';
 const LOGIN_PATH = '/login';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
     const token = request.cookies.get(COOKIE_NAME)?.value;
 
     if (!token) return redirectToLogin(request);
